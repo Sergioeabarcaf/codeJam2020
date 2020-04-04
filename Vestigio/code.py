@@ -1,6 +1,13 @@
-def getDataInt(message):
-    data = int(input(message))
-    return data
+def getDataInt(message, min, max):
+    while True:
+        data = input(message)
+        try:
+            data = int(data)
+            if(data <= max and data >= min):
+                return data
+            print('Number out range, try again')
+        except:
+            print('Only int data types are accepted')
 
 def searchRepeated(array, size):
     for i in range(size):
@@ -11,11 +18,11 @@ def searchRepeated(array, size):
 
 def getUseCase():
     useCase = []
-    size = getDataInt('Enter the size of the matriz: ')
+    size = getDataInt('Enter the size of the matriz (size between 2 and 100): ', 2, 100)
     for i in range(size):
         row = []
         for j in range(size):
-            row.append(getDataInt('Enter the number in position ' + str(i) + ',' + str(j) + ': '))
+            row.append(getDataInt('Enter the number in position ' + str(i) + ',' + str(j) + ' (number between 1 and ' + str(size) + '): ', 1, size))
         useCase.append(row)
     return useCase, size
 
@@ -42,7 +49,7 @@ def validRow(useCase, size):
         rowPosition += 1
     return acum
 
-count = getDataInt('Enter the number of use cases: ')
+count = getDataInt('Enter the number of use cases (use cases between 1 and 100): ', 1, 100)
 for i in range(count):
     useCase, size = getUseCase()
     trace = getTrace(useCase, size)
